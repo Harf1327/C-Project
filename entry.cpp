@@ -177,6 +177,7 @@ SDL_Surface* LoadImage(std::string &imageFilename, int desiredChannels) {
     if (desiredChannels != 4) {
         SDL_Log("invalid desired channels for: %s", fullPath.c_str());
         SDL_DestroySurface(result);
+        return nullptr;
     }
     SDL_PixelFormat format{SDL_PIXELFORMAT_ABGR8888};
 
@@ -525,7 +526,7 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
     
     SDL_GPUBufferBinding indexBufferBinding{};
     indexBufferBinding.buffer = appdata->indexBuffer;
-    vertexBufferBinding.offset = 0;
+    indexBufferBinding.offset = 0;
     SDL_BindGPUIndexBuffer(render_pass, &indexBufferBinding, SDL_GPU_INDEXELEMENTSIZE_16BIT);
 
     SDL_GPUTextureSamplerBinding samperBinding{};
